@@ -54,19 +54,17 @@
 
   <!-- ==========================
        PANTALLA DE CARGA (PRELOADER)
-       - Mantén Imagenes/logo.jpeg en tu carpeta Imagenes
-       - El contador aparecerá abajo del logo
   =========================== -->
   <div id="loader" role="status" aria-live="polite">
-    <div class="loader-content" aria-hidden="false">
+    <div class="loader-content">
       <img src="Imagenes/logo.jpeg" alt="Logo Publidcar" class="loader-logo" />
-      <div id="loader-counter" aria-hidden="true">0%</div>
-      <button class="loading-btn" disabled aria-hidden="true">Cargando...</button>
+      <div id="loader-counter">0%</div>
+      <button class="loading-btn" disabled>Cargando...</button>
     </div>
   </div>
 
   <!-- ==========================
-       CONTENIDO PRINCIPAL (oculto mientras carga)
+       CONTENIDO PRINCIPAL
   =========================== -->
   <div id="main-content" class="hidden">
 
@@ -78,7 +76,7 @@
       <div class="logo">Publid<span>Car</span></div>
       <div class="nav-actions">
         <a class="btn" href="#publicar">Publicar</a>
-        <a class="btn ghost" href="#contacto">Contacto</a>
+        <a class="btn ghost" href="mailto:contacto@publidcar.com?subject=Consulta">Contacto</a>
       </div>
     </nav>
 
@@ -87,10 +85,20 @@
       <p class="lead">Compra, vende o descubre modelos exclusivos para tus próximas experiencias sobre ruedas.</p>
 
       <form class="search-bar" role="search" action="#" method="get" aria-label="Buscar automóviles">
-        <label for="search-input" class="sr-only">Buscar</label>
-        <input id="search-input" name="q" aria-label="Buscar" placeholder="Buscar: marca, modelo, ciudad..." />
-        <button class="btn" type="submit">Buscar</button>
+        <label for="search-input" class="sr-only">Buscar vehículos</label>
+        <input 
+          id="search-input" 
+          name="q" 
+          type="search"
+          placeholder="Buscar: marca, modelo, ciudad..." 
+          aria-describedby="search-help"
+        />
+        <button class="btn" type="submit">
+          <span aria-hidden="true">🔍</span>
+          <span class="sr-only">Buscar</span>
+        </button>
       </form>
+      <p id="search-help" class="sr-only">Escribe la marca, modelo o ciudad del vehículo que buscas</p>
     </div>
   </header>
 
@@ -101,9 +109,9 @@
         <h2 id="galeria-title">Galería de Automóviles</h2>
         <p class="sub">Pasa el cursor sobre una tarjeta para ver acciones rápidas.</p>
 
-        <!-- DESTACADA (actualizada con tus imágenes en Imagenes/Bmw) -->
+        <!-- DESTACADA -->
         <div class="galeria-destacada" aria-labelledby="destacado-title">
-          <article class="card destacada" role="figure" aria-labelledby="destacado-title"
+          <article class="card destacada" role="figure"
                    data-id="destacado-001"
                    data-price="145000"
                    data-title="BMW M4 - Destacado"
@@ -112,11 +120,11 @@
             <div class="ribbon" aria-hidden="true">DESTACADO DE LA SEMANA</div>
 
             <figure>
-              <a href="pagina-detalle-destacado.html" aria-label="Ver detalle Auto Destacado">
+              <a href="pagina-detalle-destacado.html" aria-label="Ver detalle del BMW M4 destacado">
                 <img
                   src="Imagenes/Bmw/bmwcoupe.jpg"
                   data-large="Imagenes/Bmw/bmwcoupe.jpg"
-                  alt="BMW COUPE — vista principal"
+                  alt="BMW M4 Coupe color gris - Vista frontal"
                   loading="lazy"
                 />
               </a>
@@ -124,17 +132,22 @@
 
             <div class="overlay" aria-hidden="true">
               <div class="overlay-content">
-                <div class="price" aria-hidden="true">$145,000</div>
+                <div class="price">
+                  <span aria-label="145,000 dólares">$145,000</span>
+                  <span class="sr-only">USD</span>
+                </div>
                 <div class="photo-count" aria-hidden="true">4 fotos</div>
                 <div class="overlay-actions">
-                  <a class="btn ver" href="pagina-detalle-destacado.html" aria-label="Ver Auto Destacado">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar favorito">❤</button>
+                  <a class="btn ver" href="pagina-detalle-destacado.html" aria-label="Ver detalles del BMW M4">Ver</a>
+                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Añadir BMW M4 a favoritos">
+                    <span aria-hidden="true">❤</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <h3 id="destacado-title">BMW COUPE — Auto Destacado</h3>
+              <h3 id="destacado-title">BMW M4 Coupe — Auto Destacado</h3>
               <p class="muted">2020 · 15,000 km · Bucaramanga</p>
             </div>
           </article>
@@ -145,162 +158,160 @@
 
           <!-- Ferrari -->
           <article class="card" role="listitem"
-                   data-id="ferrari-f8-2021" data-price="320000" data-title="Ferrari F8" data-count="4"
+                   data-id="ferrari-f8-2021" 
+                   data-price="320000" 
+                   data-title="Ferrari F8" 
+                   data-count="4"
                    data-gallery="Imagenes/imagesferrari-large.jpg,Imagenes/imagesferrari-2-large.jpg,Imagenes/imagesferrari-3-large.jpg,Imagenes/imagesferrari-4-large.jpg">
             <figure>
-              <a href="pagina-detalle-ferrari.html" aria-label="Ver Ferrari F8">
-                <img src="Imagenes/imagesferrari.jpg" data-large="Imagenes/imagesferrari-large.jpg" alt="Ferrari F8" loading="lazy" />
+              <a href="pagina-detalle-ferrari.html" aria-label="Ver detalles del Ferrari F8">
+                <img 
+                  src="Imagenes/imagesferrari.jpg" 
+                  data-large="Imagenes/imagesferrari-large.jpg" 
+                  alt="Ferrari F8 Tributo color rojo - Vista lateral" 
+                  loading="lazy" 
+                />
               </a>
             </figure>
 
             <div class="overlay" aria-hidden="true">
               <div class="overlay-content">
-                <div class="price" aria-hidden="true">$320,000</div>
+                <div class="price">
+                  <span aria-label="320,000 dólares">$320,000</span>
+                  <span class="sr-only">USD</span>
+                </div>
                 <div class="photo-count" aria-hidden="true">4 fotos</div>
                 <div class="overlay-actions">
                   <a class="btn ver" href="pagina-detalle-ferrari.html" aria-label="Ver Ferrari F8">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar Ferrari como favorito">❤</button>
+                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Añadir Ferrari F8 a favoritos">
+                    <span aria-hidden="true">❤</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <h3>Ferrari F8</h3>
+              <h3>Ferrari F8 Tributo</h3>
               <p>2021 · 12,000 km · Bogotá</p>
             </div>
           </article>
 
-          <!-- BMW M4 (actualizada con tus imágenes en Imagenes/Bmw) -->
+          <!-- BMW M4 -->
           <article class="card" role="listitem"
-                   data-id="bmw-m4-2020" data-price="120500" data-title="BMW M4" data-count="4"
+                   data-id="bmw-m4-2020" 
+                   data-price="120500" 
+                   data-title="BMW M4" 
+                   data-count="4"
                    data-gallery="Imagenes/Bmw/bmw1.jpg,Imagenes/Bmw/bmw2.jpg,Imagenes/Bmw/bmw3.jpg,Imagenes/Bmw/bmwcoupe.jpg">
             <figure>
-              <a href="pagina-detalle-bmw.html" aria-label="Ver BMW M4">
-                <img src="Imagenes/Bmw/bmw1.jpg" data-large="Imagenes/Bmw/bmw1.jpg" alt="BMW M4" loading="lazy" />
+              <a href="pagina-detalle-bmw.html" aria-label="Ver detalles del BMW M4">
+                <img 
+                  src="Imagenes/Bmw/bmw1.jpg" 
+                  data-large="Imagenes/Bmw/bmw1.jpg" 
+                  alt="BMW M4 color azul - Vista delantera" 
+                  loading="lazy" 
+                />
               </a>
             </figure>
 
             <div class="overlay" aria-hidden="true">
               <div class="overlay-content">
-                <div class="price" aria-hidden="true">$120,500</div>
+                <div class="price">
+                  <span aria-label="120,500 dólares">$120,500</span>
+                  <span class="sr-only">USD</span>
+                </div>
                 <div class="photo-count" aria-hidden="true">4 fotos</div>
                 <div class="overlay-actions">
                   <a class="btn ver" href="pagina-detalle-bmw.html" aria-label="Ver BMW M4">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar BMW como favorito">❤</button>
+                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Añadir BMW M4 a favoritos">
+                    <span aria-hidden="true">❤</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <h3>BMW M4</h3>
+              <h3>BMW M4 Competition</h3>
               <p>2020 · 9,500 km · Medellín</p>
             </div>
           </article>
 
           <!-- Toyota -->
           <article class="card" role="listitem"
-                   data-id="toyota-rav4-2019" data-price="45000" data-title="Toyota RAV4" data-count="2">
+                   data-id="toyota-rav4-2019" 
+                   data-price="45000" 
+                   data-title="Toyota RAV4" 
+                   data-count="2">
             <figure>
-              <a href="pagina-detalle-toyota.html" aria-label="Ver Toyota RAV4">
-                <img src="Imagenes/imagentoyota.jpg" data-large="Imagenes/imagentoyota-large.jpg" alt="Toyota RAV4" loading="lazy" />
+              <a href="pagina-detalle-toyota.html" aria-label="Ver detalles del Toyota RAV4">
+                <img 
+                  src="Imagenes/imagentoyota.jpg" 
+                  data-large="Imagenes/imagentoyota-large.jpg" 
+                  alt="Toyota RAV4 color blanco - Vista frontal" 
+                  loading="lazy" 
+                />
               </a>
             </figure>
 
             <div class="overlay" aria-hidden="true">
               <div class="overlay-content">
-                <div class="price" aria-hidden="true">$45,000</div>
+                <div class="price">
+                  <span aria-label="45,000 dólares">$45,000</span>
+                  <span class="sr-only">USD</span>
+                </div>
                 <div class="photo-count" aria-hidden="true">2 fotos</div>
                 <div class="overlay-actions">
                   <a class="btn ver" href="pagina-detalle-toyota.html" aria-label="Ver Toyota RAV4">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar Toyota como favorito">❤</button>
+                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Añadir Toyota RAV4 a favoritos">
+                    <span aria-hidden="true">❤</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <h3>Toyota RAV4</h3>
+              <h3>Toyota RAV4 Limited</h3>
               <p>2019 · 45,000 km · Cali</p>
             </div>
           </article>
 
           <!-- Audi Q7 -->
           <article class="card" role="listitem"
-                   data-id="audi-q7-2018" data-price="60000" data-title="Audi Q7" data-count="3"
+                   data-id="audi-q7-2018" 
+                   data-price="60000" 
+                   data-title="Audi Q7" 
+                   data-count="3"
                    data-gallery="Imagenes/audi-large.jpg,Imagenes/audi-2-large.jpg,Imagenes/audi-3-large.jpg">
             <figure>
-              <a href="pagina-detalle-audi.html" aria-label="Ver Audi Q7">
-                <img src="Imagenes/audi.jpg" data-large="Imagenes/audi-large.jpg" alt="Audi Q7" loading="lazy" />
+              <a href="pagina-detalle-audi.html" aria-label="Ver detalles del Audi Q7">
+                <img 
+                  src="Imagenes/audi.jpg" 
+                  data-large="Imagenes/audi-large.jpg" 
+                  alt="Audi Q7 color negro - Vista frontal" 
+                  loading="lazy" 
+                />
               </a>
             </figure>
 
             <div class="overlay" aria-hidden="true">
               <div class="overlay-content">
-                <div class="price" aria-hidden="true">$60,000</div>
+                <div class="price">
+                  <span aria-label="60,000 dólares">$60,000</span>
+                  <span class="sr-only">USD</span>
+                </div>
                 <div class="photo-count" aria-hidden="true">3 fotos</div>
                 <div class="overlay-actions">
                   <a class="btn ver" href="pagina-detalle-audi.html" aria-label="Ver Audi Q7">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar Audi como favorito">❤</button>
+                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Añadir Audi Q7 a favoritos">
+                    <span aria-hidden="true">❤</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <h3>Audi Q7</h3>
+              <h3>Audi Q7 Premium</h3>
               <p>2018 · 60,000 km · Barranquilla</p>
-            </div>
-          </article>
-
-          <!-- Tucson -->
-          <article class="card" role="listitem"
-                   data-id="tucson-2018" data-price="160000" data-title="Tucson" data-count="3"
-                   data-gallery="Imagenes/tucson-1-large.jpg,Imagenes/tucson-2-large.jpg,Imagenes/tucson-3-large.jpg">
-            <figure>
-              <a href="pagina-detalle-tucson.html" aria-label="Ver Tucson">
-                <img src="Imagenes/tucson.jpg" data-large="Imagenes/tucson-1-large.jpg" alt="Tucson" loading="lazy" />
-              </a>
-            </figure>
-
-            <div class="overlay" aria-hidden="true">
-              <div class="overlay-content">
-                <div class="price" aria-hidden="true">$160,000</div>
-                <div class="photo-count" aria-hidden="true">3 fotos</div>
-                <div class="overlay-actions">
-                  <a class="btn ver" href="pagina-detalle-tucson.html" aria-label="Ver Tucson">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar Tucson como favorito">❤</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <h3>Tucson</h3>
-              <p>2019 · 160,000 km · Cali</p>
-            </div>
-          </article>
-
-          <!-- Mazda 7 -->
-          <article class="card" role="listitem"
-                   data-id="mazda-7-2015" data-price="150000" data-title="Mazda 7" data-count="3"
-                   data-gallery="Imagenes/mazda7-large.jpg,Imagenes/mazda7-2-large.jpg,Imagenes/mazda7-3-large.jpg">
-            <figure>
-              <a href="pagina-detalle-mazda7.html" aria-label="Ver Mazda 7">
-                <img src="Imagenes/mazda7.jpg" data-large="Imagenes/mazda7-large.jpg" alt="Mazda 7" loading="lazy" />
-              </a>
-            </figure>
-
-            <div class="overlay" aria-hidden="true">
-              <div class="overlay-content">
-                <div class="price" aria-hidden="true">$150,000</div>
-                <div class="photo-count" aria-hidden="true">3 fotos</div>
-                <div class="overlay-actions">
-                  <a class="btn ver" href="pagina-detalle-mazda.html" aria-label="Ver Mazda 7">Ver</a>
-                  <button class="btn ghost favorite" aria-pressed="false" aria-label="Marcar Mazda como favorito">❤</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <h3>Mazda 7</h3>
-              <p>2015 · 70,000 km · Villavo</p>
             </div>
           </article>
 
@@ -314,21 +325,62 @@
         <h2 id="publicar-title">Publica tu carro</h2>
         <p>Diligencia este formulario para contactarnos.</p>
         <div class="form-card">
-          <form>
+          <form id="publicar-form">
             <div class="row">
-              <input name="marca" placeholder="Marca" aria-label="Marca" />
-              <input name="modelo" placeholder="Modelo" aria-label="Modelo" />
+              <input 
+                name="marca" 
+                placeholder="Marca" 
+                aria-label="Marca del vehículo" 
+                required 
+                minlength="2"
+              />
+              <input 
+                name="modelo" 
+                placeholder="Modelo" 
+                aria-label="Modelo del vehículo" 
+                required 
+                minlength="1"
+              />
             </div>
             <div class="row">
-              <input name="ano" placeholder="Año" aria-label="Año" />
-              <input name="km" placeholder="Kilometraje" aria-label="Kilometraje" />
+              <input 
+                name="ano" 
+                placeholder="Año" 
+                type="number"
+                aria-label="Año del vehículo" 
+                min="1990" 
+                max="2025" 
+                required
+              />
+              <input 
+                name="km" 
+                placeholder="Kilometraje" 
+                type="number"
+                aria-label="Kilometraje del vehículo" 
+                min="0" 
+                step="1000"
+              />
             </div>
-            <textarea name="descripcion" placeholder="Descripción breve" aria-label="Descripción breve"></textarea>
-            <label class="file-upload">Subir fotos
-              <input type="file" accept="image/*" multiple aria-label="Subir fotos del vehículo"/>
+            <textarea 
+              name="descripcion" 
+              placeholder="Descripción breve del vehículo..." 
+              aria-label="Descripción del vehículo"
+              rows="4"
+              maxlength="500"
+            ></textarea>
+            <label class="file-upload">
+              <span>Subir fotos del vehículo (máx. 5 imágenes)</span>
+              <input 
+                type="file" 
+                accept="image/*" 
+                multiple 
+                aria-label="Seleccionar fotos del vehículo"
+                max="5"
+              />
             </label>
             <div class="actions">
               <button class="btn primary" type="submit">Publicar anuncio</button>
+              <button class="btn ghost" type="reset">Limpiar formulario</button>
             </div>
           </form>
         </div>
@@ -339,38 +391,53 @@
     <section class="destacados" aria-labelledby="ofertas-title">
       <div class="container">
         <h2 id="ofertas-title">Ofertas destacadas</h2>
-        <div class="grid">
-          <article class="mini-card">
-            <img src="Imagenes/imagenbwm.jpg" alt="Mustang GT mini" loading="lazy"/>
-            <div><h4>Mustang GT</h4><p>Precio: $145,000</p></div>
+        <div class="grid" role="list">
+          <article class="mini-card" role="listitem">
+            <img src="Imagenes/imagenbwm.jpg" alt="BMW M4 color gris" loading="lazy"/>
+            <div>
+              <h4>BMW M4 Competition</h4>
+              <p class="price">$145,000 USD</p>
+            </div>
           </article>
-          <article class="mini-card">
-            <img src="Imagenes/imagenbwm.jpg" alt="Honda Civic mini" loading="lazy"/>
-            <div><h4>Honda Civic</h4><p>Precio: $120,500</p></div>
+          <article class="mini-card" role="listitem">
+            <img src="Imagenes/imagenbwm.jpg" alt="BMW Serie 3 color blanco" loading="lazy"/>
+            <div>
+              <h4>BMW Serie 3</h4>
+              <p class="price">$120,500 USD</p>
+            </div>
           </article>
-          <article class="mini-card">
-            <img src="Imagenes/imagentoyota.jpg" alt="Nissan Leaf mini" loading="lazy"/>
-            <div><h4>Nissan Leaf</h4><p>Precio: $100,000</p></div>
+          <article class="mini-card" role="listitem">
+            <img src="Imagenes/imagentoyota.jpg" alt="Toyota RAV4 color blanco" loading="lazy"/>
+            <div>
+              <h4>Toyota RAV4</h4>
+              <p class="price">$45,000 USD</p>
+            </div>
           </article>
-          <article class="mini-card">
-            <img src="Imagenes/imagentoyota.jpg" alt="Toyota mini" loading="lazy"/>
-            <div><h4>Toyota</h4><p>Precio: $170,500</p></div>
+          <article class="mini-card" role="listitem">
+            <img src="Imagenes/imagentoyota.jpg" alt="Toyota Corolla color plateado" loading="lazy"/>
+            <div>
+              <h4>Toyota Corolla</h4>
+              <p class="price">$35,000 USD</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer" id="contacto">
+  <footer class="site-footer" id="contacto" role="contentinfo">
     <div class="wrap">
       <div class="footer-logo">Publid<span>Car</span></div>
-      <p>© 2025 - Publidcar - Confianza sobre ruedas &#128663;</p>
+      <p>© 2025 - Publidcar - Confianza sobre ruedas <span aria-hidden="true">🚗</span></p>
+      <p class="contact-info">
+        <a href="mailto:contacto@publidcar.com" aria-label="Enviar correo a Publidcar">contacto@publidcar.com</a> | 
+        <a href="tel:+573001234567" aria-label="Llamar a Publidcar">+57 300 123 4567</a>
+      </p>
     </div>
   </footer>
 
   </div><!-- /main-content -->
 
-  <!-- Tu script (asegúrate de usar la versión revisada que habíamos dejado en script.js) -->
   <script src="script.js"></script>
 </body>
 </html>
