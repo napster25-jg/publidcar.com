@@ -1,5 +1,5 @@
 // =========================
-// script.js - Publidcar - VERSIÓN COMPLETA FUNCIONAL
+// script.js - Publidcar - VERSIÓN COMPLETA FUNCIONAL CON GALERÍA
 // =========================
 
 // PRELOADER CON CONTADOR QUE SÍ FUNCIONA
@@ -67,7 +67,36 @@ function initAllFunctions() {
   initFavorites();
   initSmoothScroll();
   initFormValidation();
+  initGallery(); // ✅ FUNCIÓN DE GALERÍA
+  updatePhotoCounters(); // ✅ NUEVO: CONTADOR AUTOMÁTICO
   console.log("✅ Todas las funciones inicializadas correctamente");
+}
+
+// =========================
+// CONTADOR AUTOMÁTICO DE FOTOS - NUEVA FUNCIÓN
+// =========================
+function updatePhotoCounters() {
+  console.log("📸 Actualizando contadores de fotos automáticamente...");
+  
+  document.querySelectorAll('[data-gallery]').forEach(card => {
+    const galleryData = card.getAttribute('data-gallery');
+    const photoCountElement = card.querySelector('.photo-count');
+    
+    if (galleryData && photoCountElement) {
+      const photos = galleryData.split(',');
+      const photoCount = photos.length;
+      
+      // Actualizar el texto visible "4 fotos" → "7 fotos"
+      photoCountElement.textContent = `${photoCount} fotos`;
+      
+      // Actualizar también data-count por consistencia
+      card.setAttribute('data-count', photoCount);
+      
+      console.log(`🔄 ${card.getAttribute('data-title')}: ${photoCount} fotos`);
+    }
+  });
+  
+  console.log("✅ Contadores de fotos actualizados correctamente");
 }
 
 // MENÚ DE CONTACTO - VERSIÓN CONFIRMADA FUNCIONAL
@@ -221,6 +250,139 @@ function initFormValidation() {
       console.log("✅ Formulario enviado correctamente");
     });
   }
+}
+
+// =========================
+// GALERÍA LIGHTBOX
+// =========================
+function initGallery() {
+  console.log("🖼️ Inicializando sistema de galería lightbox...");
+  
+  // Crear el lightbox (similar a tu contact-menu)
+  const lightbox = document.createElement('div');
+  lightbox.className = 'gallery-lightbox';
+  lightbox.innerHTML = `
+    <div class="gallery-content">
+      <button class="gallery-close" aria-label="Cerrar galería">×</button>
+      <div class="gallery-counter">
+        <span class="current-index">1</span> / <span class="total-count">0</span>
+      </div>
+      <div class="gallery-main">
+        <img class="gallery-image" src="" alt="" />
+      </div>
+      <div class="gallery-thumbnails"></div>
+      <button class="gallery-nav gallery-prev" aria-label="Foto anterior">‹</button>
+      <button class="gallery-nav gallery-next" aria-label="Foto siguiente">›</button>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+
+  // Configurar botones "Ver"
+  document.querySelectorAll('.btn.ver').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const card = this.closest('.card');
+      openGallery(card);
+    });
+  });
+  
+  console.log("🎉 Sistema de galería inicializado correctamente");
+}
+
+function openGallery(card) {
+  const galleryData = card.getAttribute('data-gallery');
+  
+  if (!galleryData) {
+    console.error('❌ No se encontró data-gallery en el card');
+    alert('No hay galería de fotos disponible para este vehículo');
+    return;
+  }
+
+  const photos = galleryData.split(',').map(photo => photo.trim());
+  const lightbox = document.querySelector('.gallery-lightbox');
+  const lightboxImage = lightbox.querySelector('.gallery-image');
+  const thumbnailsContainer = lightbox.querySelector('.gallery-thumbnails');
+  const currentIndexEl = lightbox.querySelector('.current-index');
+  const totalCountEl = lightbox.querySelector('.total-count');
+  
+  let currentIndex = 0;
+
+  // Mostrar lightbox (igual que tu contact-menu)
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  console.log("🖼️ Abriendo galería con", photos.length, "fotos");
+
+  // Actualizar contador
+  totalCountEl.textContent = photos.length;
+
+  // Función de navegación
+  function navigateTo(index) {
+    currentIndex = index;
+    lightboxImage.src = photos[currentIndex];
+    lightboxImage.alt = `Imagen ${currentIndex + 1} de ${photos.length} - ${card.getAttribute('data-title') || 'Vehículo'}`;
+    currentIndexEl.textContent = currentIndex + 1;
+    
+    // Actualizar miniaturas activas
+    thumbnailsContainer.querySelectorAll('.thumb').forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === currentIndex);
+    });
+    
+    console.log(`🔄 Navegando a foto ${currentIndex + 1}/${photos.length}`);
+  }
+
+  // Crear miniaturas
+  thumbnailsContainer.innerHTML = '';
+  photos.forEach((photo, index) => {
+    const thumb = document.createElement('img');
+    thumb.src = photo;
+    thumb.alt = `Miniatura ${index + 1}`;
+    thumb.className = 'thumb';
+    if (index === 0) thumb.classList.add('active');
+    thumb.addEventListener('click', () => navigateTo(index));
+    thumbnailsContainer.appendChild(thumb);
+  });
+
+  // Cargar primera imagen
+  navigateTo(0);
+
+  // Event listeners para navegación
+  lightbox.querySelector('.gallery-next').addEventListener('click', () => {
+    navigateTo((currentIndex + 1) % photos.length);
+  });
+
+  lightbox.querySelector('.gallery-prev').addEventListener('click', () => {
+    navigateTo((currentIndex - 1 + photos.length) % photos.length);
+  });
+
+  // Cerrar lightbox
+  lightbox.querySelector('.gallery-close').addEventListener('click', closeGallery);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeGallery();
+  });
+
+  // Navegación con teclado
+  document.addEventListener('keydown', function keyHandler(e) {
+    if (!lightbox.classList.contains('active')) return;
+    
+    switch(e.key) {
+      case 'Escape':
+        closeGallery();
+        break;
+      case 'ArrowRight':
+        navigateTo((currentIndex + 1) % photos.length);
+        break;
+      case 'ArrowLeft':
+        navigateTo((currentIndex - 1 + photos.length) % photos.length);
+        break;
+    }
+  });
+}
+
+function closeGallery() {
+  const lightbox = document.querySelector('.gallery-lightbox');
+  lightbox.classList.remove('active');
+  document.body.style.overflow = 'auto';
+  console.log("❌ Galería cerrada");
 }
 
 // SISTEMA DE RESPALDO POR SI EL PRELOADER FALLA
