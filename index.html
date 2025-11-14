@@ -138,26 +138,33 @@
       </div>
     </div>
 
-    <div class="hero-content">
-      <h1>Encuentra el carro de tus sueños</h1>
-      <p class="lead">Compra, vende o descubre modelos exclusivos para tus próximas experiencias sobre ruedas.</p>
+    <div class="search-filters">
+  <form id="filterForm">
+    <input type="text" id="searchInput" placeholder="Buscar por marca o modelo..." />
 
-      <form class="search-bar" role="search" action="#" method="get" aria-label="Buscar automóviles">
-        <label for="search-input" class="sr-only">Buscar vehículos</label>
-        <input 
-          id="search-input" 
-          name="q" 
-          type="search"
-          placeholder="Buscar: marca, modelo, ciudad..." 
-          aria-describedby="search-help"
-        />
-        <button class="btn" type="submit">
-          <span aria-hidden="true">🔍</span>
-          <span class="sr-only">Buscar</span>
-        </button>
-      </form>
-      <p id="search-help" class="sr-only">Escribe la marca, modelo o ciudad del vehículo que buscas</p>
-    </div>
+    <select id="filterCity">
+      <option value="">Todas las ciudades</option>
+      <option value="Bogotá">Bogotá</option>
+      <option value="Bucaramanga">Bucaramanga</option>
+      <option value="Medellín">Medellín</option>
+    </select>
+
+    <select id="filterYear">
+      <option value="">Todos los años</option>
+      <option value="2015">2015</option>
+      <option value="2019">2019</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2024">2024</option>
+    </select>
+
+    <input type="number" id="priceMin" placeholder="Precio min (COP)" />
+    <input type="number" id="priceMax" placeholder="Precio max (COP)" />
+
+    <button type="submit" class="btn">Filtrar</button>
+  </form>
+</div>
+
   </header>
 
   <main>
